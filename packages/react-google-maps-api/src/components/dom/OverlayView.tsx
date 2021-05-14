@@ -46,7 +46,7 @@ export interface OverlayViewProps {
   getPixelPositionOffset?: (offsetWidth: number, offsetHeight: number) => { x: number; y: number }
   bounds?: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral
   position?: google.maps.LatLng | google.maps.LatLngLiteral
-  onLoad?: (overlayView: google.maps.OverlayView) => void
+  onLoad?: (overlayView: google.maps.OverlayView, containerRef:React.RefObject<HTMLDivElement>) => void
   onUnmount?: (overlayView: google.maps.OverlayView) => void
   draggable?: boolean
 }
@@ -94,7 +94,7 @@ export class OverlayView extends React.PureComponent<OverlayViewProps, OverlayVi
   }
   onAdd = (): void => {
     this.updatePane()
-    this.props.onLoad?.(this)
+    this.props.onLoad?.(this.overlayView,this.containerRef)
   }
 
   onPositionElement = (): void => {
@@ -147,7 +147,9 @@ export class OverlayView extends React.PureComponent<OverlayViewProps, OverlayVi
     overlayView.onAdd = this.onAdd
     overlayView.draw = this.draw
     overlayView.onRemove = this.onRemove
+    overlayView.draggable = this.draggable
     this.overlayView = overlayView
+    console.log('this.draggable',this.draggable)
   }
 
   componentDidMount(): void {
