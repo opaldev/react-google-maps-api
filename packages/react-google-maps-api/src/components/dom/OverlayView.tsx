@@ -48,6 +48,7 @@ export interface OverlayViewProps {
   position?: google.maps.LatLng | google.maps.LatLngLiteral
   onLoad?: (overlayView: google.maps.OverlayView) => void
   onUnmount?: (overlayView: google.maps.OverlayView) => void
+  draggable?: boolean
 }
 
 export class OverlayView extends React.PureComponent<OverlayViewProps, OverlayViewState> {
@@ -93,7 +94,7 @@ export class OverlayView extends React.PureComponent<OverlayViewProps, OverlayVi
   }
   onAdd = (): void => {
     this.updatePane()
-    this.props.onLoad?.(this.overlayView)
+    this.props.onLoad?.(this)
   }
 
   onPositionElement = (): void => {
