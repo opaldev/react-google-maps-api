@@ -94,7 +94,7 @@ export class OverlayView extends React.PureComponent<OverlayViewProps, OverlayVi
   }
   onAdd = (): void => {
     this.updatePane()
-    this.props.onLoad?.(this.overlayView)
+    this.props.onLoad?.(this)
   }
 
   onPositionElement = (): void => {
@@ -148,7 +148,6 @@ export class OverlayView extends React.PureComponent<OverlayViewProps, OverlayVi
     overlayView.draw = this.draw
     overlayView.onRemove = this.onRemove
     this.overlayView = overlayView
-    console.log('is Draggable',this.draggable)
   }
 
   componentDidMount(): void {
